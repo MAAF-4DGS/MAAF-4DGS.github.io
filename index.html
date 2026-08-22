@@ -1,30 +1,1122 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Coming Soon</title>
-  <style>
-    html, body {
-      height: 100%;
-      margin: 0;
-    }
-    body {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-family: system-ui, -apple-system, sans-serif;
-      background: #0f0f0f;
-      color: #f5f5f5;
-    }
-    h1 {
-      font-weight: 300;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MAAF</title>
+    <link rel="icon" type="image/x-icon" href="./static/images/logo.webp">
+    <style>
+        .author-info {
+            font-family: 'Roboto', sans-serif;
+            text-align: center; /* Center the author and affiliation information */
+        }
+        .author-names {
+            font-size: 20px;
+        }
+        .affiliations {
+            font-size: 17px;
+            margin-top: 5px;
+            text-align: center;
+        }
+        .affiliation-item {
+            margin-top: 10px;
+        }
+        .superscript {
+            font-size: 0.8em;
+            vertical-align: super;
+        }
+
+        .author-names a {
+            color: #1a5fb4;
+            text-decoration: none;
+        }
+        .author-names a:hover { text-decoration: underline; }
+
+        .link-buttons {
+            text-align: center;
+            margin: 18px 0 10px;
+        }
+        .link-button {
+            display: inline-block;
+            margin: 0 6px;
+            padding: 9px 22px;
+            border-radius: 999px;
+            background: #1f1f1f;
+            color: #fff;
+            font-family: 'Roboto', sans-serif;
+            font-size: 16px;
+            text-decoration: none;
+        }
+        .link-button:hover { background: #3a3a3a; }
+
+
+        /* Container for the scroller */
+        .scroller-container {
+            overflow: hidden;
+            width: 100%;
+            background-color: #E5E5E5; /* Optional background color */
+            position: relative;
+        }
+
+        /* Scroller styling */
+        .scroller {
+            display: flex;
+            gap: 20px;
+            animation: scroll 10s linear infinite; /* Smooth scrolling animation */
+        }
+
+        /* Individual items in the scroller */
+        .item {
+            text-align: center;
+        }
+
+        .item img {
+            display: inline-block;
+            height: 500px; /* Adjust the height to your preference */
+            width: auto;   /* Maintains the aspect ratio */
+            /* Remove resizing styles to preserve original size */
+            border-radius: 8px; /* Optional: Add rounded corners */
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Optional: Add shadow */
+        }
+
+        /* Scrolling animation */
+        @keyframes scroll {
+            0% {
+                transform: translateX(0%);
+            }
+            100% {
+                transform: translateX(-50%); /* Moves by half since we duplicate content */
+            }
+        }
+        body {
+            background-color: #E5E5E5;
+            font-family: 'Noto Sans', sans-serif;
+            color: #333333; /* Dark gray */
+        }
+        
+        .content-container {
+            max-width: 80%; /* Constrain content width */
+            margin: 0 auto; /* Center content within parent */
+        }
+        .title1 {
+            font-size: 50px; /* Adjust the size as needed */
+        }
+        .title2 {
+            font-size: 36px; /* Adjust the size as needed */
+        }
+        .title3 {
+            font-size: 18px; /* Adjust the size as needed */
+            text-align: justify;
+        }
+        .minimal-button {
+            display: inline-flex;
+            align-items: center; /* Align icon and text vertically */
+            justify-content: center;
+            background-color: #333333; /* Dark button background */
+            border: none;
+            color: #E5E5E5; /* Light text color */
+            padding: 12px 24px; /* Comfortable padding */
+            font-size: 16px; /* Readable font size */
+            border-radius: 8px; /* Smooth rounded corners */
+            cursor: pointer;
+            text-decoration: none;
+            text-align: center;
+            font-weight: bold; /* Make text stand out */
+            box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+            transition: all 0.3s ease; /* Smooth hover effect */
+            gap: 8px; /* Space between icon and text */
+        }
+
+        .minimal-button:hover {
+            background-color: #444444; /* Slightly lighter background on hover */
+            box-shadow: 2px 2px 12px rgba(0, 0, 0, 0.2); /* Slightly deeper shadow */
+        }
+
+        .minimal-button svg {
+            width: 25px;
+            height: 25px;
+            fill: #E5E5E5; /* Icon color */
+        }
+        .comparison-container {
+            display: flex;
+            justify-content: center;
+            gap: 20px; /* Spacing between video pairs */
+            max-width: 95vw;
+            margin-top: 20px;
+        }
+        .video-section {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .video-container {
+            position: relative;
+            width: 676px; /* Adjust based on your requirement */
+            height: 507px;
+            overflow: hidden;
+            margin-top: 10px;
+        }
+        video {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .top-video {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            clip-path: inset(0 50% 0 0); /* Initially, left half is visible */
+        }
+        .slider {
+            position: absolute;
+            left: 50%;
+            top: 0;
+            width: 4px;
+            height: 100%;
+            background: white;
+            cursor: ew-resize;
+            transform: translateX(-50%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .slider-button {
+            width: 30px;
+            height: 30px;
+            background-color: white;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+        }
+        .slider-button::before {
+            content: "⇄";
+            font-size: 18px;
+            color: black;
+        }
+        .text-overlay {
+            position: absolute;
+            color: white;
+            font-size: 18px;
+            font-weight: bold;
+            padding: 10px;
+            background: rgba(0, 0, 0, 0.5);
+            border-radius: 5px;
+            transition: opacity 0.2s ease-in-out;
+        }
+        .top-text {
+            top: 10px;
+            left: 10px;
+        }
+        .bottom-text {
+            top: 10px;
+            right: 10px;
+        }
+         /* Column styling */
+         /* Column styling */
+         .grid-container {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr); /* 2 columns */
+            gap: 30px;
+            justify-content: center;
+            margin: auto;
+            width: 100%;
+            max-width: 1500px;
+        }
+         .scene-container {
+              margin-bottom: 40px;
+          }
+
+          .scene-title {
+              text-align: center;
+              font-size: 22px;
+              font-weight: bold;
+              margin-bottom: 15px;
+          }
+          .column {
+              width: 50%;
+              position: relative;
+              display: flex;
+              justify-content: center;
+              align-items: center;
+          }
+
+          .image-wrapper {
+              position: relative;
+              display: none; /* Hide all images by default */
+          }
+
+          .image-wrapper.active {
+              display: block; /* Show only the active image */
+          }
+
+          /* Overlay Text */
+          .image-overlay {
+              position: absolute;
+              bottom: 20px;
+              left: 15%;
+              transform: translateX(-50%);
+              background-color: rgba(0, 0, 0, 0.6);
+              color: white;
+              padding: 8px 12px;
+              font-size: 24px;
+              font-weight: bold;
+              border-radius: 5px;
+          }
+          .image-overlay-synthetic {
+              position: absolute;
+              bottom: 300px;
+              left: 20%;
+              transform: translateX(-50%);
+              background-color: rgba(0, 0, 0, 0.6);
+              color: white;
+              padding: 8px 12px;
+              font-size: 20px;
+              font-weight: bold;
+              border-radius: 5px;
+          }
+
+          /* Navigation Buttons */
+          .nav-button {
+              position: absolute;
+              top: 50%;
+              transform: translateY(-50%);
+              background-color: rgba(0, 0, 0, 0.5);
+              color: white;
+              border: none;
+              padding: 10px;
+              cursor: pointer;
+              font-size: 18px;
+              z-index: 2;
+          }
+
+          .nav-button.prev {
+              left: 10px;
+          }
+
+          .nav-button.next {
+              right: 10px;
+          }
+
+          .nav-button:hover {
+              background-color: rgba(0, 0, 0, 0.8);
+          }
+
+          .grid-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr; /* 2 columns */
+            grid-template-rows: repeat(4, auto); /* 4 rows */
+            gap: 30px; /* Space between comparisons */
+            justify-content: center;
+            margin: auto;
+            width: 100%;
+            max-width: 1600px;
+        }
+
+    </style>
 </head>
 <body>
-  <h1>Coming Soon</h1>
+
+    
+    <div style="width: 75%; margin: auto; padding: 20px;">
+        <center>
+        <h1 class="title1">Towards Alias-Free 4D Gaussian Representations with Motion-Aware Filtering</h1>
+        </center>
+    </div>
+
+    <!-- ==================== AUTHORS ====================
+         TODO: replace each href="#" with the author's homepage.
+    -->
+    <div class="author-info">
+      <p class="author-names">
+        <a href="https://ankitdhim.github.io/" target="_blank" rel="noopener">Ankit Dhiman</a><span class="superscript">1,2</span>,
+        <a href="#" target="_blank" rel="noopener">Kunal A Kathare</a><span class="superscript">1</span>,
+        <a href="#" target="_blank" rel="noopener">Pranav Vignesh</a><span class="superscript">1</span>,
+        <a href="https://in.linkedin.com/in/lokesh-boregowda-14321810" target="_blank" rel="noopener">Lokesh R Boregowda</a><span class="superscript">2</span>,
+        <a href="https://cds.iisc.ac.in/faculty/venky/" target="_blank" rel="noopener">Venkatesh Babu Radhakrishnan</a><span class="superscript">1</span>
+      </p>
+      <div class="affiliations">
+        <div class="affiliation-item"><span class="superscript">1</span>Indian Institute of Science, Bangalore</div>
+        <div class="affiliation-item"><span class="superscript">2</span>Samsung R&amp;D Institute India - Bangalore</div>
+      </div>
+    </div>
+
+    <!-- ==================== LINKS ====================
+         TODO: replace href="#" with https://arxiv.org/abs/XXXX.XXXXX once posted.
+    -->
+    <div class="link-buttons">
+      <a class="link-button" href="#">arXiv</a>
+    </div>
+
+
+    
+    
+      
+      
+
+      <div style="display: flex; justify-content: center; align-items: center; width: 100%; margin: auto; ">
+        <!-- Content on the left -->
+        <div style="width: 50%; padding-right: 30px;">
+            <h2 class="title2" style="font-size: 28px; text-align: center;">
+                <b>TL;DR: </b>We propose a motion-aware smoothing filter to mitigate aliasing in dynamic novel-view synthesis. By adapting the low-pass filter based on scene motion, our approach improves rendering quality at higher resolutions.
+            </h2>
+        </div>
+    
+        
+    </div>
+
+    <div style="width: 70%; margin: auto; padding: 20px;">
+        <center>
+        <div style="width: 100%; margin: auto; ">
+            <center>
+            <img src="./static/images/teaser.jpg" width="1068" height="448"/>
+        </center>
+        </div>
+        </center>
+        <center>
+          <p class="title3">
+            We compare novel view synthesis results from our method (b) with SaRO-GS (d), focusing on both dynamic regions (e.g., hand
+            movements, cooking actions) and static regions (e.g., bottles, background). The zoomed-in regions (c) highlight that our method produces
+            sharper details and fewer artifacts, demonstrating superior synthesis quality in both motion and static areas. The input images (a) provide
+            context for the scene.
+          </p>
+          </center>
+    </div>
+    
+    <div>
+        <center>
+        <h2 class="title1">Abstract</h2>
+        </center>
+        <div style="width: 60%; margin: auto; padding: 10px;">
+        <center>
+            <p class="title3">
+              Novel-view synthesis of dynamic scenes, crucial for AR/VR
+              applications, remains a challenging problem. Recent
+              methods adapt representations like 3D Gaussian Splatting
+              (3DGS) and Neural Radiance Fields (NeRF) for dynamic
+              scenes by incorporating time as the fourth dimension (4D
+              Representations). These 4D Representations still suffer
+              from aliasing artifacts, especially when generating novel
+              views from divergent viewpoints (zoom-in/zoom-out opera-
+              tions). While using 3D smoothing filters like those proposed
+              in Mip-Splatting might seem like a possible solution, they
+              fail to account for local motion and also exhibit aliasing.
+              To address this, we propose a motion-aware 3D smooth-
+              ing filter specifically designed for 4D representations. Our
+              approach adapts the filter strength based on local motion
+              information, effectively mitigating aliasing without compro-
+              mising rendering quality. This is achieved by estimating the
+              joint density function for time and focal-to-depth ratio using
+              non-parametric estimation method. During inference, we
+              sample from this joint distribution to derive the appropri-
+              ate smoothing filter. This flexible strategy can be integrated
+              with various 4D representations. Our evaluations on stan-
+              dard datasets demonstrate superior performance compared
+              to state-of-the-art methods.  
+            </p>
+        </center>
+        </div>
+    </div>
+
+
+    <div style="width: 80%; margin: auto; padding: 30px;">
+        <center>
+        <img src="./static/images/method_intution.png" alt="Interpolate start reference image." width="100%" height="auto"/>
+        </center>
+        <center>
+        <p class="title3">
+            <b>Method Intuition.</b> Given (a) 4D signal (represented by a 2D signal), different projections of it at timestamps t<sub>1</sub>, t<sub>2</sub> & t<sub>3</sub> are represented by a 3D signal (represented by a 1D signal) in (b), (c) and (d). 3D Gaussian primitive which models this continuous 3D signal are observed by multiple cameras and at each time stamp it is band-limited by different sampling intervals.
+        </p>
+        </center>
+    </div>
+    
+    <div style="width: 60%; margin: auto;">
+      
+      <h1 class="title2"><center>Toggle the slider left & right to see the difference</center></h1>
+      <div class="comparison-container">
+        <!-- Flame Steak Video Section -->
+        <div class="video-section">
+            <h1 class="title3"><center>flame steak</center></h1>
+            <div class="video-container">
+                <video class="videoBottom" autoplay loop muted>
+                    <source src="static/videos/sarogs/flamesteak_sarogs_r1_comp.mp4" type="video/mp4">
+                </video>
+                <div class="text-overlay bottom-text">SAROGS</div>
+
+                <video class="top-video" autoplay loop muted>
+                    <source src="static/videos/ours/flamesteak_ours_r1comp.mp4" type="video/mp4">
+                </video>
+                <div class="text-overlay top-text">OURS</div>
+
+                <div class="slider">
+                    <div class="slider-button"></div>
+                </div>
+            </div>
+            <h1 class="title3"><center>For dynamic region, the difference can be observed at torch gun & for static region the things kept at the table like the salt & pepper bottles on the left and wine bottle & spinach in a bowl on the right side. </center></h1>
+        </div>
+
+        <!-- Coffee Martini Video Section -->
+        <div class="video-section">
+            <h1 class="title3"><center>Coffee Martini</center></h1>
+            <div class="video-container">
+                <video class="videoBottom" autoplay loop muted>
+                    <source src="static/videos/sarogs/coffeemartini_sarogs_r1_comp.mp4" type="video/mp4">
+                </video>
+                <div class="text-overlay bottom-text">SAROGS</div>
+
+                <video class="top-video" autoplay loop muted>
+                    <source src="static/videos/ours/coffeemartini_ours_r1_comp.mp4" type="video/mp4">
+                </video>
+                <div class="text-overlay top-text">OURS</div>
+
+                <div class="slider">
+                    <div class="slider-button"></div>
+                </div>
+            </div>
+            <h1 class="title3"><center>For dynamic region, the difference can be observed in the flow of coffee from the steel glass to martini glass, & for static region the bottles kept on the right side of the table & the GEORGIA TECH poster on the left side.</center></h1>
+        </div>
+
+    </div>
+
+      </div>
+      
+      
+      
+      <section>
+        <div style="width: 90%; margin: auto; padding: 50px;">
+        <h1 class="title1"><center>Baseline Comparison</center></h1>
+        <h1 class="title2"><center>Use the left & right buttons to toggle between different baselines</center></h1>
+      
+          <!-- Scene 1: Flame Steak -->
+          <div class="scene-container">
+              <h2 class="scene-title">flame Steak</h2>
+              <div class="comparison-container">
+                  <!-- First Column: Static Image -->
+                  <div class="column static-image">
+                      <img src="static/images/Plenoptic_modified/flamesteak/00052Ours_zoom.jpg" alt="My Image" width="676px" height="507px">
+                      <div class="image-overlay">Ours</div>
+                  </div>
+      
+                  <!-- Second Column: Baseline Images with Navigation -->
+                  <div class="column baseline-images">
+                      <div class="image-wrapper active">
+                          <img src="static/images/Plenoptic_modified/flamesteak/000524dgs_zoom.jpg" alt="Baseline 1" width="676px" height="507px">
+                          <div class="image-overlay">4DGS</div>
+                      </div>
+      
+                      <div class="image-wrapper">
+                          <img src="static/images/Plenoptic_modified/flamesteak/000524drotor_zoom.jpg" alt="Baseline 2" width="676px" height="507px">
+                          <div class="image-overlay">4DRotorGS</div>
+                      </div>
+      
+                      <div class="image-wrapper">
+                          <img src="static/images/Plenoptic_modified/flamesteak/00052Grid4D_zoom.jpg" alt="Baseline 3" width="676px" height="507px">
+                          <div class="image-overlay">Grid4D</div>
+                      </div>
+
+                      <div class="image-wrapper">
+                        <img src="static/images/Plenoptic_modified/flamesteak/00052SaroGS_zoom.jpg" alt="Baseline 3" width="676px" height="507px">
+                        <div class="image-overlay">SaRO-GS</div>
+                      </div>
+      
+                      <div class="image-wrapper">
+                        <img src="static/images/Plenoptic_modified/flamesteak/00052space_zoom.jpg" alt="Baseline 3" width="676px" height="507px">
+                        <div class="image-overlay">Spacetime-GS</div>
+                      </div>
+                      <!-- Navigation Buttons -->
+                      <button class="nav-button prev">&#10094;</button> <!-- Left Arrow -->
+                      <button class="nav-button next">&#10095;</button> <!-- Right Arrow -->
+                  </div>
+                </div>
+                <h1 class="title3"><center>The differences can be observed at torch gun tip and flame coming out of it for dynamic region 
+                  and for static region the label on the wine bottle and the details of the spinach kept in the bowl.
+                </center></h1>
+          </div>
+      
+          <!-- Scene 2: Another Example Scene -->
+          <div class="scene-container">
+              <h2 class="scene-title">coffee martini</h2>
+              <div class="comparison-container">
+                  <div class="column static-image">
+                      <img src="static/images/Plenoptic_modified/coffeemartini/00231Ours_zoom.jpg" alt="My Image" width="676px" height="507px">
+                      <div class="image-overlay">Ours</div>
+                  </div>
+      
+                  <div class="column baseline-images">
+                      <div class="image-wrapper active">
+                          <img src="static/images/Plenoptic_modified/coffeemartini/002314dgs_zoom.jpg" alt="Baseline 1" width="676px" height="507px">
+                          <div class="image-overlay">4DGS</div>
+                      </div>
+      
+                      <div class="image-wrapper">
+                          <img src="static/images/Plenoptic_modified/coffeemartini/002314drotor_zoom.jpg" alt="Baseline 2" width="676px" height="507px">
+                          <div class="image-overlay">4DRotorGS</div>
+                      </div>
+      
+                      <div class="image-wrapper">
+                          <img src="static/images/Plenoptic_modified/coffeemartini/00231Grid4D_zoom.jpg" alt="Baseline 3" width="676px" height="507px">
+                          <div class="image-overlay">Grid4D</div>
+                      </div>
+
+                      <div class="image-wrapper">
+                        <img src="static/images/Plenoptic_modified/coffeemartini/00231SaroGS_zoom.jpg" alt="Baseline 3" width="676px" height="507px">
+                        <div class="image-overlay">SaRO-GS</div>
+                      </div>
+      
+                      <div class="image-wrapper">
+                        <img src="static/images/Plenoptic_modified/coffeemartini/00231space_zoom.jpg" alt="Baseline 3" width="676px" height="507px">
+                        <div class="image-overlay">Spacetime-GS</div>
+                      </div>
+                      <!-- Navigation Buttons -->
+                      <button class="nav-button prev">&#10094;</button> <!-- Left Arrow -->
+                      <button class="nav-button next">&#10095;</button> <!-- Right Arrow -->
+                  </div>
+              </div>
+              <h1 class="title3"><center>The differences can be observed at the flow of coffee from the steel glass to the martini glass for dynamic region 
+                and for static region the labels on the bottles kept on the right side of the table.
+              </center></h1>
+          </div>
+
+          <div class="scene-container">
+            <h2 class="scene-title">cut roasted beef</h2>
+            <div class="comparison-container">
+                <div class="column static-image">
+                    <img src="static/images/Plenoptic_modified/cutroastedbeef/00014Ours_zoom.jpg" alt="My Image" width="676px" height="507px">
+                    <div class="image-overlay">Ours</div>
+                </div>
+    
+                <div class="column baseline-images">
+                    <div class="image-wrapper active">
+                        <img src="static/images/Plenoptic_modified/cutroastedbeef/000144dgs_zoom.jpg" alt="Baseline 1" width="676px" height="507px">
+                        <div class="image-overlay">4DGS</div>
+                    </div>
+    
+                    <div class="image-wrapper">
+                        <img src="static/images/Plenoptic_modified/cutroastedbeef/000144drotor_zoom.jpg" alt="Baseline 2" width="676px" height="507px">
+                        <div class="image-overlay">4DRotorGS</div>
+                    </div>
+    
+                    <div class="image-wrapper">
+                        <img src="static/images/Plenoptic_modified/cutroastedbeef/00014Grid4D_zoom.jpg" alt="Baseline 3" width="676px" height="507px">
+                        <div class="image-overlay">Grid4D</div>
+                    </div>
+
+                    <div class="image-wrapper">
+                      <img src="static/images/Plenoptic_modified/cutroastedbeef/00014SaroGS_zoom.jpg" alt="Baseline 3" width="676px" height="507px">
+                      <div class="image-overlay">SaRO-GS</div>
+                    </div>
+    
+                    <div class="image-wrapper">
+                      <img src="static/images/Plenoptic_modified/cutroastedbeef/00014space_zoom.jpg" alt="Baseline 3" width="676px" height="507px">
+                      <div class="image-overlay">Spacetime-GS</div>
+                    </div>
+                    <!-- Navigation Buttons -->
+                    <button class="nav-button prev">&#10094;</button> <!-- Left Arrow -->
+                    <button class="nav-button next">&#10095;</button> <!-- Right Arrow -->
+                </div>
+            </div>
+            <h1 class="title3"><center>The differences can be observed at the hands of the man for dynamic region 
+              and for static region the labels on the bottles kept in the shelves on the right side.
+            </center></h1>
+          </div>
+
+          <div class="scene-container">
+            <h2 class="scene-title">flame salmon</h2>
+            <div class="comparison-container">
+                <div class="column static-image">
+                    <img src="static/images/Plenoptic_modified/flamesalmon/00050Ours_zoom.jpg" alt="My Image" width="676px" height="507px">
+                    <div class="image-overlay">Ours</div>
+                </div>
+    
+                <div class="column baseline-images">
+                    <div class="image-wrapper active">
+                        <img src="static/images/Plenoptic_modified/flamesalmon/000504dgs_zoom.jpg" alt="Baseline 1" width="676px" height="507px">
+                        <div class="image-overlay">4DGS</div>
+                    </div>
+    
+                    <div class="image-wrapper">
+                        <img src="static/images/Plenoptic_modified/flamesalmon/000504drotor_zoom.jpg" alt="Baseline 2" width="676px" height="507px">
+                        <div class="image-overlay">4DRotorGS</div>
+                    </div>
+    
+                    <div class="image-wrapper">
+                        <img src="static/images/Plenoptic_modified/flamesalmon/00050Grid4D_zoom.jpg" alt="Baseline 3" width="676px" height="507px">
+                        <div class="image-overlay">Grid4D</div>
+                    </div>
+
+                    <div class="image-wrapper">
+                      <img src="static/images/Plenoptic_modified/flamesalmon/00050SaroGS_zoom.jpg" alt="Baseline 3" width="676px" height="507px">
+                      <div class="image-overlay">SaRO-GS</div>
+                    </div>
+    
+                    <div class="image-wrapper">
+                      <img src="static/images/Plenoptic_modified/flamesalmon/00050space_zoom.jpg" alt="Baseline 3" width="676px" height="507px">
+                      <div class="image-overlay">Spacetime-GS</div>
+                    </div>
+                    <!-- Navigation Buttons -->
+                    <button class="nav-button prev">&#10094;</button> <!-- Left Arrow -->
+                    <button class="nav-button next">&#10095;</button> <!-- Right Arrow -->
+                </div>
+            </div>
+            <h1 class="title3"><center>The differences can be observed at at the hands of the man and the tip of the torch gun for dynamic region 
+              and for static region the quality of the things kept on the left side of the table and the window behind the man for static region.
+            </center></h1>
+          </div>
+
+          <div class="scene-container">
+            <h2 class="scene-title">sear steak</h2>
+            <div class="comparison-container">
+                <div class="column static-image">
+                    <img src="static/images/Plenoptic_modified/searsteak/00130Ours_zoom.jpg" alt="My Image" width="676px" height="507px">
+                    <div class="image-overlay">Ours</div>
+                </div>
+    
+                <div class="column baseline-images">
+                    <div class="image-wrapper active">
+                        <img src="static/images/Plenoptic_modified/searsteak/001304dgs_zoom.jpg" alt="Baseline 1" width="676px" height="507px">
+                        <div class="image-overlay">4DGS</div>
+                    </div>
+    
+                    <div class="image-wrapper">
+                        <img src="static/images/Plenoptic_modified/searsteak/001304drotor_zoom.jpg" alt="Baseline 2" width="676px" height="507px">
+                        <div class="image-overlay">4DRotorGS</div>
+                    </div>
+    
+                    <div class="image-wrapper">
+                        <img src="static/images/Plenoptic_modified/searsteak/00130Grid4D_zoom.jpg" alt="Baseline 3" width="676px" height="507px">
+                        <div class="image-overlay">Grid4D</div>
+                    </div>
+
+                    <div class="image-wrapper">
+                      <img src="static/images/Plenoptic_modified/searsteak/00130SaroGS_zoom.jpg" alt="Baseline 3" width="676px" height="507px">
+                      <div class="image-overlay">SaRO-GS</div>
+                    </div>
+    
+                    <div class="image-wrapper">
+                      <img src="static/images/Plenoptic_modified/searsteak/00130space_zoom.jpg" alt="Baseline 3" width="676px" height="507px">
+                      <div class="image-overlay">Spacetime-GS</div>
+                    </div>
+                    <!-- Navigation Buttons -->
+                    <button class="nav-button prev">&#10094;</button> <!-- Left Arrow -->
+                    <button class="nav-button next">&#10095;</button> <!-- Right Arrow -->
+                </div>
+            </div>
+            <h1 class="title3"><center>The differences can be observed at the hands of the man for dynamic region 
+              and for static region the label on the wine bottle and the details of the spinach kept in the bowl.
+            </center></h1>
+          </div>
+
+          <div class="scene-container">
+            <h2 class="scene-title">cook spinach</h2>
+            <div class="comparison-container">
+                <div class="column static-image">
+                    <img src="static/images/Plenoptic_modified/cookspinach/00073Ours_zoom.jpg" alt="My Image" width="676px" height="507px">
+                    <div class="image-overlay">Ours</div>
+                </div>
+    
+                <div class="column baseline-images">
+                    <div class="image-wrapper active">
+                        <img src="static/images/Plenoptic_modified/cookspinach/000734dgs_zoom.jpg" alt="Baseline 1" width="676px" height="507px">
+                        <div class="image-overlay">4DGS</div>
+                    </div>
+    
+                    <div class="image-wrapper">
+                        <img src="static/images/Plenoptic_modified/cookspinach/000734Drotor_zoom.jpg" alt="Baseline 2" width="676px" height="507px">
+                        <div class="image-overlay">4DRotorGS</div>
+                    </div>
+    
+                    <div class="image-wrapper">
+                        <img src="static/images/Plenoptic_modified/cookspinach/00073Grid4D_zoom.jpg" alt="Baseline 3" width="676px" height="507px">
+                        <div class="image-overlay">Grid4D</div>
+                    </div>
+
+                    <div class="image-wrapper">
+                      <img src="static/images/Plenoptic_modified/cookspinach/00073SaroGS_zoom.jpg" alt="Baseline 3" width="676px" height="507px">
+                      <div class="image-overlay">SaRO-GS</div>
+                    </div>
+    
+                    <div class="image-wrapper">
+                      <img src="static/images/Plenoptic_modified/cookspinach/00024Space_zoom.jpg" alt="Baseline 3" width="676px" height="507px">
+                      <div class="image-overlay">Spacetime-GS</div>
+                    </div>
+                    <!-- Navigation Buttons -->
+                    <button class="nav-button prev">&#10094;</button> <!-- Left Arrow -->
+                    <button class="nav-button next">&#10095;</button> <!-- Right Arrow -->
+                </div>
+            </div>
+          </div>        
+          <h1 class="title3"><center>The differences can be observed at hands of the man for dynamic region 
+            and for static region the label on the wine bottle and the details on the empty bowl kept on the table.
+          </center></h1>
+            </div>
+
+
+
+            <div style="width: 90%; margin: auto;">
+              <h1 class="title1"><center>Synthetic Dataset</center></h1>
+          
+              <div class="grid-container">
+                  <!-- Scene 1 -->
+                  <div class="scene-container">
+                      <h2 class="scene-title">lego</h2>
+                      <div class="comparison-container">
+                          <div class="column static-image">
+                              <img src="static/images/DNeRF_modified/lego/00007Ours_zoom.png" alt="My Image" width="350px" height="350px">
+                              <div class="image-overlay-synthetic">Ours</div>
+                          </div>
+          
+                          <div class="column baseline-images">
+                              <div class="image-wrapper active">
+                                  <img src="static/images/DNeRF_modified/lego/000074dgs_zoom.png" alt="Baseline 1" width="350px" height="350px">
+                                  <div class="image-overlay-synthetic">4DGS</div>
+                              </div>
+                              <div class="image-wrapper">
+                                  <img src="static/images/DNeRF_modified/lego/000074drotor_zoom.png" alt="Baseline 2" width="350px" height="350px">
+                                  <div class="image-overlay-synthetic">4DRotorGS</div>
+                              </div>
+                              <div class="image-wrapper">
+                                  <img src="static/images/DNeRF_modified/lego/00007Grid4D_zoom.png" alt="Baseline 3" width="350px" height="350px">
+                                  <div class="image-overlay-synthetic">Grid4D</div>
+                              </div>
+                              <div class="image-wrapper">
+                                <img src="static/images/DNeRF_modified/lego/00007SaroGS_zoom.png" alt="Baseline 3" width="350px" height="350px">
+                                <div class="image-overlay-synthetic">SaRO-GS</div>
+                              </div>
+                              <div class="image-wrapper">
+                                <img src="static/images/DNeRF_modified/lego/00007Deform_zoom.png" alt="Baseline 3" width="350px" height="350px">
+                                <div class="image-overlay-synthetic">Deformable3DGS</div>
+                              </div>
+                              <button class="nav-button prev">&#10094;</button>
+                              <button class="nav-button next">&#10095;</button>
+                          </div>
+                      </div>
+                  </div>
+          
+                  <!-- Repeat for 7 more scenes -->
+                  <div class="scene-container">
+                    <h2 class="scene-title">hell warrior</h2>
+                    <div class="comparison-container">
+                        <div class="column static-image">
+                            <img src="static/images/DNeRF_modified/hellwarrior/00013Ours_zoom.png" alt="My Image" width="350px" height="350px">
+                            <div class="image-overlay-synthetic">Ours</div>
+                        </div>
+        
+                        <div class="column baseline-images">
+                            <div class="image-wrapper active">
+                                <img src="static/images/DNeRF_modified/hellwarrior/000134dgs_zoom.png" alt="Baseline 1" width="350px" height="350px">
+                                <div class="image-overlay-synthetic">4DGS</div>
+                            </div>
+                            <div class="image-wrapper">
+                                <img src="static/images/DNeRF_modified/hellwarrior/000134drotor_zoom.png" alt="Baseline 2" width="350px" height="350px">
+                                <div class="image-overlay-synthetic">4DRotorGS</div>
+                            </div>
+                            <div class="image-wrapper">
+                                <img src="static/images/DNeRF_modified/hellwarrior/00013Grid4D_zoom.png" alt="Baseline 3" width="350px" height="350px">
+                                <div class="image-overlay-synthetic">Grid4D</div>
+                            </div>
+                            <div class="image-wrapper">
+                              <img src="static/images/DNeRF_modified/hellwarrior/00013SaroGS_zoom.png" alt="Baseline 3" width="350px" height="350px">
+                              <div class="image-overlay-synthetic">SaRO-GS</div>
+                            </div>
+                            <div class="image-wrapper">
+                              <img src="static/images/DNeRF_modified/hellwarrior/00013deform_zoom.png" alt="Baseline 3" width="350px" height="350px">
+                              <div class="image-overlay-synthetic">Deformable3DGS</div>
+                            </div>
+                            <button class="nav-button prev">&#10094;</button>
+                            <button class="nav-button next">&#10095;</button>
+                        </div>
+                    </div>
+                  </div>
+
+                  <div class="scene-container">
+                    <h2 class="scene-title">hook</h2>
+                    <div class="comparison-container">
+                        <div class="column static-image">
+                            <img src="static/images/DNeRF_modified/hook/00005Ours_zoom.png" alt="My Image" width="350px" height="350px">
+                            <div class="image-overlay-synthetic">Ours</div>
+                        </div>
+        
+                        <div class="column baseline-images">
+                            <div class="image-wrapper active">
+                                <img src="static/images/DNeRF_modified/hook/000054dgs_zoom.png" alt="Baseline 1" width="350px" height="350px">
+                                <div class="image-overlay-synthetic">4DGS</div>
+                            </div>
+                            <div class="image-wrapper">
+                                <img src="static/images/DNeRF_modified/hook/000054drotor_zoom.png" alt="Baseline 2" width="350px" height="350px">
+                                <div class="image-overlay-synthetic">4DRotorGS</div>
+                            </div>
+                            <div class="image-wrapper">
+                                <img src="static/images/DNeRF_modified/hook/00005Grid4D_zoom.png" alt="Baseline 3" width="350px" height="350px">
+                                <div class="image-overlay-synthetic">Grid4D</div>
+                            </div>
+                            <div class="image-wrapper">
+                              <img src="static/images/DNeRF_modified/hook/00005SaroGS_zoom.png" alt="Baseline 3" width="350px" height="350px">
+                              <div class="image-overlay-synthetic">SaRO-GS</div>
+                            </div>
+                            <div class="image-wrapper">
+                              <img src="static/images/DNeRF_modified/hook/00005Deform_zoom.png" alt="Baseline 3" width="350px" height="350px">
+                              <div class="image-overlay-synthetic">Deformable3DGS</div>
+                            </div>
+                            <button class="nav-button prev">&#10094;</button>
+                            <button class="nav-button next">&#10095;</button>
+                        </div>
+                    </div>
+                  </div>
+
+                  <div class="scene-container">
+                    <h2 class="scene-title">mutant</h2>
+                    <div class="comparison-container">
+                        <div class="column static-image">
+                            <img src="static/images/DNeRF_modified/mutant/00015Ours_zoom.png" alt="My Image" width="350px" height="350px">
+                            <div class="image-overlay-synthetic">Ours</div>
+                        </div>
+        
+                        <div class="column baseline-images">
+                            <div class="image-wrapper active">
+                                <img src="static/images/DNeRF_modified/mutant/000154dgs_zoom.png" alt="Baseline 1" width="350px" height="350px">
+                                <div class="image-overlay-synthetic">4DGS</div>
+                            </div>
+                            <div class="image-wrapper">
+                                <img src="static/images/DNeRF_modified/mutant/000154drotor_zoom.png" alt="Baseline 2" width="350px" height="350px">
+                                <div class="image-overlay-synthetic">4DRotorGS</div>
+                            </div>
+                            <div class="image-wrapper">
+                                <img src="static/images/DNeRF_modified/mutant/00015Grid4D_zoom.png" alt="Baseline 3" width="350px" height="350px">
+                                <div class="image-overlay-synthetic">Grid4D</div>
+                            </div>
+                            <div class="image-wrapper">
+                              <img src="static/images/DNeRF_modified/mutant/00015SaroGS_zoom.png" alt="Baseline 3" width="350px" height="350px">
+                              <div class="image-overlay-synthetic">SaRO-GS</div>
+                            </div>
+                            <div class="image-wrapper">
+                              <img src="static/images/DNeRF_modified/mutant/00015Deform_zoom.png" alt="Baseline 3" width="350px" height="350px">
+                              <div class="image-overlay-synthetic">Deformable3DGS</div>
+                            </div>
+                            <button class="nav-button prev">&#10094;</button>
+                            <button class="nav-button next">&#10095;</button>
+                        </div>
+                    </div>
+                  </div>
+                  
+
+                  <div class="scene-container">
+                    <h2 class="scene-title">standup</h2>
+                    <div class="comparison-container">
+                        <div class="column static-image">
+                            <img src="static/images/DNeRF_modified/standup/00016Ours_zoom.png" alt="My Image" width="350px" height="350px">
+                            <div class="image-overlay-synthetic">Ours</div>
+                        </div>
+        
+                        <div class="column baseline-images">
+                            <div class="image-wrapper active">
+                                <img src="static/images/DNeRF_modified/standup/000164dgs_zoom.png" alt="Baseline 1" width="350px" height="350px">
+                                <div class="image-overlay-synthetic">4DGS</div>
+                            </div>
+                            <div class="image-wrapper">
+                                <img src="static/images/DNeRF_modified/standup/000164drotor_zoom.png" alt="Baseline 2" width="350px" height="350px">
+                                <div class="image-overlay-synthetic">4DRotorGS</div>
+                            </div>
+                            <div class="image-wrapper">
+                                <img src="static/images/DNeRF_modified/standup/00016Grid4D_zoom.png" alt="Baseline 3" width="350px" height="350px">
+                                <div class="image-overlay-synthetic">Grid4D</div>
+                            </div>
+                            <div class="image-wrapper">
+                              <img src="static/images/DNeRF_modified/standup/00016SaroGS_zoom.png" alt="Baseline 3" width="350px" height="350px">
+                              <div class="image-overlay-synthetic">SaRO-GS</div>
+                            </div>
+                            <div class="image-wrapper">
+                              <img src="static/images/DNeRF_modified/standup/00016Deform_zoom.png" alt="Baseline 3" width="350px" height="350px">
+                              <div class="image-overlay-synthetic">Deformable3DGS</div>
+                            </div>
+                            <button class="nav-button prev">&#10094;</button>
+                            <button class="nav-button next">&#10095;</button>
+                        </div>
+                    </div>
+                  </div>
+          
+
+                  <div class="scene-container">
+                    <h2 class="scene-title">trex</h2>
+                    <div class="comparison-container">
+                        <div class="column static-image">
+                            <img src="static/images/DNeRF_modified/trex/00012Ours_zoom.png" alt="My Image" width="350px" height="350px">
+                            <div class="image-overlay-synthetic">Ours</div>
+                        </div>
+        
+                        <div class="column baseline-images">
+                            <div class="image-wrapper active">
+                                <img src="static/images/DNeRF_modified/trex/000124dgs_zoom.png" alt="Baseline 1" width="350px" height="350px">
+                                <div class="image-overlay-synthetic">4DGS</div>
+                            </div>
+                            <div class="image-wrapper">
+                                <img src="static/images/DNeRF_modified/trex/000124drotor_zoom.png" alt="Baseline 2" width="350px" height="350px">
+                                <div class="image-overlay-synthetic">4DRotorGS</div>
+                            </div>
+                            <div class="image-wrapper">
+                                <img src="static/images/DNeRF_modified/trex/00012Grid4D_zoom.png" alt="Baseline 3" width="350px" height="350px">
+                                <div class="image-overlay-synthetic">Grid4D</div>
+                            </div>
+                            <div class="image-wrapper">
+                              <img src="static/images/DNeRF_modified/trex/00012SaroGS_zoom.png" alt="Baseline 3" width="350px" height="350px">
+                              <div class="image-overlay-synthetic">SaRO-GS</div>
+                            </div>
+                            <div class="image-wrapper">
+                              <img src="static/images/DNeRF_modified/trex/00012Deform_zoom.png" alt="Baseline 3" width="350px" height="350px">
+                              <div class="image-overlay-synthetic">Deformable3DGS</div>
+                            </div>
+                            <button class="nav-button prev">&#10094;</button>
+                            <button class="nav-button next">&#10095;</button>
+                        </div>
+                    </div>
+                  </div>
+                  <div class="scene-container">
+                    <h2 class="scene-title">jumpingjacks</h2>
+                    <div class="comparison-container">
+                        <div class="column static-image">
+                            <img src="static/images/DNeRF_modified/jumpingjacks/00013Ours_zoom.png" alt="My Image" width="350px" height="350px">
+                            <div class="image-overlay-synthetic">Ours</div>
+                        </div>
+        
+                        <div class="column baseline-images">
+                            <div class="image-wrapper active">
+                                <img src="static/images/DNeRF_modified/jumpingjacks/000134dgs_zoom.png" alt="Baseline 1" width="350px" height="350px">
+                                <div class="image-overlay-synthetic">4DGS</div>
+                            </div>
+                            <div class="image-wrapper">
+                                <img src="static/images/DNeRF_modified/jumpingjacks/000134drotor_zoom.png" alt="Baseline 2" width="350px" height="350px">
+                                <div class="image-overlay-synthetic">4DRotorGS</div>
+                            </div>
+                            <div class="image-wrapper">
+                                <img src="static/images/DNeRF_modified/jumpingjacks/00013Grid4D_zoom.png" alt="Baseline 3" width="350px" height="350px">
+                                <div class="image-overlay-synthetic">Grid4D</div>
+                            </div>
+                            <div class="image-wrapper">
+                              <img src="static/images/DNeRF_modified/jumpingjacks/00013SaroGS_zoom.png" alt="Baseline 3" width="350px" height="350px">
+                              <div class="image-overlay-synthetic">SaRO-GS</div>
+                            </div>
+                            <div class="image-wrapper">
+                              <img src="static/images/DNeRF_modified/jumpingjacks/00013Deform_zoom.png" alt="Baseline 3" width="350px" height="350px">
+                              <div class="image-overlay-synthetic">Deformable3DGS</div>
+                            </div>
+                            <button class="nav-button prev">&#10094;</button>
+                            <button class="nav-button next">&#10095;</button>
+                        </div>
+                    </div>
+                  </div>
+
+                  <div class="scene-container">
+                    <h2 class="scene-title">bouncing balls</h2>
+                    <div class="comparison-container">
+                        <div class="column static-image">
+                            <img src="static/images/DNeRF_modified/bouncingballs/00019Ours_zoom.png" alt="My Image" width="350px" height="350px">
+                            <div class="image-overlay-synthetic">Ours</div>
+                        </div>
+        
+                        <div class="column baseline-images">
+                            <div class="image-wrapper active">
+                                <img src="static/images/DNeRF_modified/bouncingballs/000194dgs_zoom.png" alt="Baseline 1" width="350px" height="350px">
+                                <div class="image-overlay-synthetic">4DGS</div>
+                            </div>
+                            <div class="image-wrapper">
+                                <img src="static/images/DNeRF_modified/bouncingballs/000194drotor_zoom.png" alt="Baseline 2" width="350px" height="350px">
+                                <div class="image-overlay-synthetic">4DRotorGS</div>
+                            </div>
+                            <div class="image-wrapper">
+                                <img src="static/images/DNeRF_modified/bouncingballs/00019Grid4D_zoom.png" alt="Baseline 3" width="350px" height="350px">
+                                <div class="image-overlay-synthetic">Grid4D</div>
+                            </div>
+                            <div class="image-wrapper">
+                              <img src="static/images/DNeRF_modified/bouncingballs/00019SaroGS_zoom.png" alt="Baseline 3" width="350px" height="350px">
+                              <div class="image-overlay-synthetic">SaRO-GS</div>
+                            </div>
+                            <div class="image-wrapper">
+                              <img src="static/images/DNeRF_modified/bouncingballs/00019Deform_zoom.png" alt="Baseline 3" width="350px" height="350px">
+                              <div class="image-overlay-synthetic">Deformable3DGS</div>
+                            </div>
+                            <button class="nav-button prev">&#10094;</button>
+                            <button class="nav-button next">&#10095;</button>
+                        </div>
+                    </div>
+                  </div>
+              </div>
+          </div>
+          
+      
+  </section>            
+        
+            
+    <div style="width: 80%; margin: auto; padding: 20px; text-align: center;">
+      <h2 class="title2">Thank You</h2>
+    </div>
+    
+    <script>
+        const scroller = document.querySelector('.scroller');
+
+        // Duplicate items for infinite scrolling
+        const clone = scroller.innerHTML;
+        scroller.innerHTML += clone;
+        
+    </script>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+    document.querySelectorAll(".baseline-images").forEach((scene) => {
+        const wrappers = scene.querySelectorAll(".image-wrapper");
+        const prevButton = scene.querySelector(".prev");
+        const nextButton = scene.querySelector(".next");
+        let currentIndex = 0;
+
+        function updateImages() {
+            wrappers.forEach((wrapper, index) => {
+                wrapper.classList.toggle("active", index === currentIndex);
+            });
+        }
+
+        prevButton.addEventListener("click", function () {
+            currentIndex = (currentIndex - 1 + wrappers.length) % wrappers.length;
+            updateImages();
+        });
+
+        nextButton.addEventListener("click", function () {
+            currentIndex = (currentIndex + 1) % wrappers.length;
+            updateImages();
+        });
+
+        updateImages(); // Initialize first image as active
+    });
+});
+
+
+  </script>
+    <script>
+      document.querySelectorAll(".video-container").forEach(container => {
+          const slider = container.querySelector(".slider");
+          const topVideo = container.querySelector(".top-video");
+          const bottomText = container.querySelector(".bottom-text");
+          const topText = container.querySelector(".top-text");
+
+          let dragging = false;
+
+          slider.addEventListener("mousedown", () => dragging = true);
+          document.addEventListener("mouseup", () => dragging = false);
+
+          document.addEventListener("mousemove", (e) => {
+              if (!dragging) return;
+              const rect = container.getBoundingClientRect();
+              let percentage = ((e.clientX - rect.left) / rect.width) * 100;
+              percentage = Math.max(0, Math.min(100, percentage)); // Clamp between 0 and 100
+
+              // Move slider and adjust clip-path
+              topVideo.style.clipPath = `inset(0 ${100 - percentage}% 0 0)`;
+              slider.style.left = `${percentage}%`;
+
+              // Adjust text visibility
+              topText.style.opacity = percentage > 5 ? 1 : 0;
+              bottomText.style.opacity = percentage < 95 ? 1 : 0;
+          });
+      });
+  </script>
 </body>
 </html>
