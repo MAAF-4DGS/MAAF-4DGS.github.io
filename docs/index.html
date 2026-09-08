@@ -320,6 +320,29 @@
             max-width: 1600px;
         }
 
+        /* YouTube Responsive Iframe */
+        .youtube-container {
+            position: relative;
+            width: 100%;
+            max-width: 900px;
+            margin: 40px auto;
+            padding-bottom: 56.25%; /* 16:9 aspect ratio */
+            height: 0;
+            overflow: hidden;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .youtube-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+            border-radius: 8px;
+        }
+
     </style>
 </head>
 <body>
@@ -356,11 +379,17 @@
       <a class="link-button" href="https://github.com/val-iisc/MAAF-4DGS" target="_blank" rel="noopener">Code </a>
     </div>
 
+    <!-- ==================== YOUTUBE VIDEO ====================
+         Responsive YouTube embed for the project video
+    -->
+    <div class="youtube-container">
+      <iframe src="https://www.youtube.com/embed/jUBFwzTYiHY" allowfullscreen="" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"></iframe>
+    </div>
 
-    
-    
-      
-      
+
+
+
+
 
       <div style="display: flex; justify-content: center; align-items: center; width: 100%; margin: auto; ">
         <!-- Content on the left -->
