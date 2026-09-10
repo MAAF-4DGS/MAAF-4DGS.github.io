@@ -665,29 +665,7 @@
         <div style="width: 60%; margin: auto; padding: 10px;">
         <center>
             <p class="title3">
-              Novel-view synthesis of dynamic scenes, crucial for AR/VR
-              applications, remains a challenging problem. Recent
-              methods adapt representations like 3D Gaussian Splatting
-              (3DGS) and Neural Radiance Fields (NeRF) for dynamic
-              scenes by incorporating time as the fourth dimension (4D
-              Representations). These 4D Representations still suffer
-              from aliasing artifacts, especially when generating novel
-              views from divergent viewpoints (zoom-in/zoom-out opera-
-              tions). While using 3D smoothing filters like those proposed
-              in Mip-Splatting might seem like a possible solution, they
-              fail to account for local motion and also exhibit aliasing.
-              To address this, we propose a motion-aware 3D smooth-
-              ing filter specifically designed for 4D representations. Our
-              approach adapts the filter strength based on local motion
-              information, effectively mitigating aliasing without compro-
-              mising rendering quality. This is achieved by estimating the
-              joint density function for time and focal-to-depth ratio using
-              non-parametric estimation method. During inference, we
-              sample from this joint distribution to derive the appropri-
-              ate smoothing filter. This flexible strategy can be integrated
-              with various 4D representations. Our evaluations on stan-
-              dard datasets demonstrate superior performance compared
-              to state-of-the-art methods.  
+              Novel-view synthesis of dynamic scenes, crucial for AR/VR applications, remains a challenging problem. Recent methods adapt representations like 3D Gaussian Splatting (3DGS) and Neural Radiance Fields (NeRF) for dynamic scenes by incorporating time as the fourth dimension (4D representations). These 4D representations still suffer from aliasing artifacts, especially when generating novel views from divergent viewpoints (zoom-in/zoom-out operations). While using 3D smoothing filters like those proposed in Mip-Splatting might seem like a possible solution, they fail to account for local motion and also exhibit aliasing. To address this, we propose a motion-aware 3D smoothing filter specifically designed for 4D representations. Our approach adapts the filter strength based on local motion information, effectively mitigating aliasing without compromising rendering quality. This is achieved by estimating the joint density function of time and focal-to-depth ratio using a non-parametric estimation method. During inference, we sample from this joint distribution to determine the appropriate smoothing filter. This flexible strategy can be integrated with various 4D representations. Our evaluations on standard datasets demonstrate superior performance compared to state-of-the-art methods.
             </p>
         </center>
         </div>
